@@ -1,3 +1,5 @@
+-- create database zyb_demo default character set utf8;
+
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `username` varchar(100) NOT NULL DEFAULT '' COMMENT '用户名',
