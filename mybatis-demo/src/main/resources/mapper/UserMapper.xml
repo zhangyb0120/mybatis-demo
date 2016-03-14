@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyb.mapper.UserMapper">
+
+    <insert id="save" parameterType="user" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+       insert into user(username, realname, mobile_number, password, locked)
+       values(#{username}, #{realname}, #{mobileNumber}, #{password}, #{locked})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="findUserById1" parameterType="int" resultType="user">
+        select id, username, realname, mobile_number as mobileNumber, password, locked from user where id = #{id}
+    </select>
+
+    <resultMap id="userResultMap" type="user">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="realname" column="realname"/>
+        <result property="mobileNumber" column="mobile_number"/>
+        <result property="password" column="password"/>
+        <result property="locked" column="locked"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="findUserById2" parameterType="int" resultMap="userResultMap">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="findUser"  resultMap="userResultMap">
+        select * from user
+    </select>
+
+    <update id="update" parameterType="user">
+        update user set realname=#{realname}, mobile_number=#{mobileNumber} where id=#{id}
+    </update>
+
+</mapper>
